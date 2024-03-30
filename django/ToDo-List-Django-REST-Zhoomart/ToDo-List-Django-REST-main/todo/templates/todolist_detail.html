@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <form method="post">
+        <input value="Главная страница" type="button" onclick="location.href='{% url "index" %}';">
+    </form>
+    <div class="todolist mb-4">
+        <div class="todolist-body">
+            <h4 class="todolist-title">Задание: {{ todolist.tasks }}</h4>
+            <h4 class="todolist-text">Задание создано: {{ todolist.date_and_time_of_creation }}</h4>
+            <h4 class="todolist-text">Задание назначено на: {{ todolist.estimated_and_time_of_completion }}</h4>
+            <h4 class="todolist-text">Задание переведено в статус 'Выполнено': {{ todolist.date_and_time_of_completion }}</h4>
+            <h4 class="todolist-subtitle mb-2 text-muted">Статус выполнения: {{ todolist.status }}</h4>
+        </div>
+    </div>
+
+    <form action="{% url 'update' todolist.pk %}" method="get">
+        <input type="submit" value="Изменить задание">
+    </form>
+    <form action="{% url 'delete' todolist.pk %}" method="get">
+        <input type="submit" value="Удалить задание">
+    </form>
+{% endblock content %}
